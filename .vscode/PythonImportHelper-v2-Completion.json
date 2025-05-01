@@ -1,0 +1,245 @@
+[
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "YOLO",
+        "importPath": "ultralytics",
+        "description": "ultralytics",
+        "isExtraImport": true,
+        "detail": "ultralytics",
+        "documentation": {}
+    },
+    {
+        "label": "YOLO",
+        "importPath": "ultralytics",
+        "description": "ultralytics",
+        "isExtraImport": true,
+        "detail": "ultralytics",
+        "documentation": {}
+    },
+    {
+        "label": "YOLO",
+        "importPath": "ultralytics",
+        "description": "ultralytics",
+        "isExtraImport": true,
+        "detail": "ultralytics",
+        "documentation": {}
+    },
+    {
+        "label": "cv2",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "cv2",
+        "description": "cv2",
+        "detail": "cv2",
+        "documentation": {}
+    },
+    {
+        "label": "streamlit",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "streamlit",
+        "description": "streamlit",
+        "detail": "streamlit",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "get_model_info",
+        "importPath": "libs.evaluation",
+        "description": "libs.evaluation",
+        "isExtraImport": true,
+        "detail": "libs.evaluation",
+        "documentation": {}
+    },
+    {
+        "label": "process_frame",
+        "importPath": "libs.evaluation",
+        "description": "libs.evaluation",
+        "isExtraImport": true,
+        "detail": "libs.evaluation",
+        "documentation": {}
+    },
+    {
+        "label": "calculate_performance_metrics",
+        "importPath": "libs.evaluation",
+        "description": "libs.evaluation",
+        "isExtraImport": true,
+        "detail": "libs.evaluation",
+        "documentation": {}
+    },
+    {
+        "label": "get_model_info",
+        "importPath": "libs.evaluation",
+        "description": "libs.evaluation",
+        "isExtraImport": true,
+        "detail": "libs.evaluation",
+        "documentation": {}
+    },
+    {
+        "label": "process_frame",
+        "importPath": "libs.evaluation",
+        "description": "libs.evaluation",
+        "isExtraImport": true,
+        "detail": "libs.evaluation",
+        "documentation": {}
+    },
+    {
+        "label": "calculate_performance_metrics",
+        "importPath": "libs.evaluation",
+        "description": "libs.evaluation",
+        "isExtraImport": true,
+        "detail": "libs.evaluation",
+        "documentation": {}
+    },
+    {
+        "label": "get_model_info",
+        "kind": 2,
+        "importPath": "libs.evaluation",
+        "description": "libs.evaluation",
+        "peekOfCode": "def get_model_info(model_path):\n    \"\"\"Get model size in MB and number of parameters\"\"\"\n    try:\n        size_bytes = os.path.getsize(model_path)\n        size_mb = size_bytes / (1024 * 1024)  # Convert to MB\n        model = YOLO(model_path)\n        num_params = sum(p.numel() for p in model.parameters())\n        return size_mb, num_params\n    except:\n        return 0, 0",
+        "detail": "libs.evaluation",
+        "documentation": {}
+    },
+    {
+        "label": "process_frame",
+        "kind": 2,
+        "importPath": "libs.evaluation",
+        "description": "libs.evaluation",
+        "peekOfCode": "def process_frame(frame, model, conf_threshold, classes_to_count):\n    \"\"\"Process a single frame and return metrics\"\"\"\n    start_time = time.time()\n    results = model.predict(frame, conf=conf_threshold)[0]\n    boxes = results.boxes.xyxy.cpu().numpy()\n    classes_detected = results.boxes.cls.cpu().numpy()\n    confidences = results.boxes.conf.cpu().numpy()\n    # Count people (class 0)\n    object_count = sum(1 for cls in classes_detected if int(cls) in classes_to_count)\n    # Draw bounding boxes",
+        "detail": "libs.evaluation",
+        "documentation": {}
+    },
+    {
+        "label": "calculate_performance_metrics",
+        "kind": 2,
+        "importPath": "libs.evaluation",
+        "description": "libs.evaluation",
+        "peekOfCode": "def calculate_performance_metrics(video_length, frame_size, model_name, num_params, \n                                avg_fps, avg_inference_time, total_inference_time, \n                                total_objects_detected):\n    \"\"\"Calculate and return performance metrics\"\"\"\n    return {\n        \"Metric\": [\n            \"Video Length (s)\", \n            \"Frame Size\", \n            \"Model\", \n            \"Parameters\",",
+        "detail": "libs.evaluation",
+        "documentation": {}
+    },
+    {
+        "label": "uploaded_file",
+        "kind": 5,
+        "importPath": "pages.1_crowd_in_mecca",
+        "description": "pages.1_crowd_in_mecca",
+        "peekOfCode": "uploaded_file = st.sidebar.file_uploader(\"Upload a video file\", type=[\"mp4\", \"avi\", \"mov\"], key=\"sidebar\")\n# Sidebar: Model selection\nst.sidebar.title(\"🔧 Settings\")\n# Only YOLOv11 models as specified\navailable_models = [\n    \"yolo11n.pt\", \n    \"yolo11s.pt\", \n    \"yolo11m.pt\", \n    \"yolo11l.pt\", \n    \"yolo11x.pt\"",
+        "detail": "pages.1_crowd_in_mecca",
+        "documentation": {}
+    },
+    {
+        "label": "available_models",
+        "kind": 5,
+        "importPath": "pages.1_crowd_in_mecca",
+        "description": "pages.1_crowd_in_mecca",
+        "peekOfCode": "available_models = [\n    \"yolo11n.pt\", \n    \"yolo11s.pt\", \n    \"yolo11m.pt\", \n    \"yolo11l.pt\", \n    \"yolo11x.pt\"\n]\nselected_model = st.sidebar.selectbox(\"Select Model\", available_models)\n# Classes to count (0=person by default)\nclasses_to_count = [0]  # Simplified to just count people by default",
+        "detail": "pages.1_crowd_in_mecca",
+        "documentation": {}
+    },
+    {
+        "label": "selected_model",
+        "kind": 5,
+        "importPath": "pages.1_crowd_in_mecca",
+        "description": "pages.1_crowd_in_mecca",
+        "peekOfCode": "selected_model = st.sidebar.selectbox(\"Select Model\", available_models)\n# Classes to count (0=person by default)\nclasses_to_count = [0]  # Simplified to just count people by default\n# Confidence threshold slider\nconf_threshold = st.sidebar.slider(\"Confidence Threshold\", 0.1, 0.9, 0.5, 0.05)\n# Main app behavior\nif uploaded_file is not None:\n    input_video_path = \"temp_video.mp4\"\n    with open(input_video_path, 'wb') as f:\n        f.write(uploaded_file.getbuffer())",
+        "detail": "pages.1_crowd_in_mecca",
+        "documentation": {}
+    },
+    {
+        "label": "classes_to_count",
+        "kind": 5,
+        "importPath": "pages.1_crowd_in_mecca",
+        "description": "pages.1_crowd_in_mecca",
+        "peekOfCode": "classes_to_count = [0]  # Simplified to just count people by default\n# Confidence threshold slider\nconf_threshold = st.sidebar.slider(\"Confidence Threshold\", 0.1, 0.9, 0.5, 0.05)\n# Main app behavior\nif uploaded_file is not None:\n    input_video_path = \"temp_video.mp4\"\n    with open(input_video_path, 'wb') as f:\n        f.write(uploaded_file.getbuffer())\n    # Create two columns with equal width for videos\n    col1, col2 = st.columns(2)",
+        "detail": "pages.1_crowd_in_mecca",
+        "documentation": {}
+    },
+    {
+        "label": "conf_threshold",
+        "kind": 5,
+        "importPath": "pages.1_crowd_in_mecca",
+        "description": "pages.1_crowd_in_mecca",
+        "peekOfCode": "conf_threshold = st.sidebar.slider(\"Confidence Threshold\", 0.1, 0.9, 0.5, 0.05)\n# Main app behavior\nif uploaded_file is not None:\n    input_video_path = \"temp_video.mp4\"\n    with open(input_video_path, 'wb') as f:\n        f.write(uploaded_file.getbuffer())\n    # Create two columns with equal width for videos\n    col1, col2 = st.columns(2)\n    with col1:\n        st.subheader(\"📊 Original Video\")",
+        "detail": "pages.1_crowd_in_mecca",
+        "documentation": {}
+    },
+    {
+        "label": "uploaded_file",
+        "kind": 5,
+        "importPath": "pages.people_in_bus",
+        "description": "pages.people_in_bus",
+        "peekOfCode": "uploaded_file = st.sidebar.file_uploader(\"Upload a video file\", type=[\"mp4\", \"avi\", \"mov\"])\n# Sidebar: Model selection\nst.sidebar.title(\"🔧 Settings\")\n# Only YOLOv11 models as specified\navailable_models = [\n    \"yolo11n.pt\", \n    \"yolo11s.pt\", \n    \"yolo11m.pt\", \n    \"yolo11l.pt\", \n    \"yolo11x.pt\"",
+        "detail": "pages.people_in_bus",
+        "documentation": {}
+    },
+    {
+        "label": "available_models",
+        "kind": 5,
+        "importPath": "pages.people_in_bus",
+        "description": "pages.people_in_bus",
+        "peekOfCode": "available_models = [\n    \"yolo11n.pt\", \n    \"yolo11s.pt\", \n    \"yolo11m.pt\", \n    \"yolo11l.pt\", \n    \"yolo11x.pt\"\n]\nselected_model = st.sidebar.selectbox(\"Select Model\", available_models)\n# Classes to count (0=person by default)\nclasses_to_count = [0]  # Simplified to just count people by default",
+        "detail": "pages.people_in_bus",
+        "documentation": {}
+    },
+    {
+        "label": "selected_model",
+        "kind": 5,
+        "importPath": "pages.people_in_bus",
+        "description": "pages.people_in_bus",
+        "peekOfCode": "selected_model = st.sidebar.selectbox(\"Select Model\", available_models)\n# Classes to count (0=person by default)\nclasses_to_count = [0]  # Simplified to just count people by default\n# Confidence threshold slider\nconf_threshold = st.sidebar.slider(\"Confidence Threshold\", 0.1, 0.9, 0.5, 0.05)\n# Main app behavior\nif uploaded_file is not None:\n    input_video_path = \"temp_video.mp4\"\n    with open(input_video_path, 'wb') as f:\n        f.write(uploaded_file.getbuffer())",
+        "detail": "pages.people_in_bus",
+        "documentation": {}
+    },
+    {
+        "label": "classes_to_count",
+        "kind": 5,
+        "importPath": "pages.people_in_bus",
+        "description": "pages.people_in_bus",
+        "peekOfCode": "classes_to_count = [0]  # Simplified to just count people by default\n# Confidence threshold slider\nconf_threshold = st.sidebar.slider(\"Confidence Threshold\", 0.1, 0.9, 0.5, 0.05)\n# Main app behavior\nif uploaded_file is not None:\n    input_video_path = \"temp_video.mp4\"\n    with open(input_video_path, 'wb') as f:\n        f.write(uploaded_file.getbuffer())\n    # Create two columns with equal width for videos\n    col1, col2 = st.columns(2)",
+        "detail": "pages.people_in_bus",
+        "documentation": {}
+    },
+    {
+        "label": "conf_threshold",
+        "kind": 5,
+        "importPath": "pages.people_in_bus",
+        "description": "pages.people_in_bus",
+        "peekOfCode": "conf_threshold = st.sidebar.slider(\"Confidence Threshold\", 0.1, 0.9, 0.5, 0.05)\n# Main app behavior\nif uploaded_file is not None:\n    input_video_path = \"temp_video.mp4\"\n    with open(input_video_path, 'wb') as f:\n        f.write(uploaded_file.getbuffer())\n    # Create two columns with equal width for videos\n    col1, col2 = st.columns(2)\n    with col1:\n        st.subheader(\"📊 Original Video\")",
+        "detail": "pages.people_in_bus",
+        "documentation": {}
+    }
+]
